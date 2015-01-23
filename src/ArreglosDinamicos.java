@@ -55,9 +55,9 @@ public class ArreglosDinamicos {
         for(String cad : cadenas){
             System.out.println(cad);
         }
-        
-        //Arraylist con tipos primitivos
+
         /*
+        Arraylist con tipos primitivos
             int -> Integer
             double -> Double
             char -> Character
@@ -66,6 +66,7 @@ public class ArreglosDinamicos {
         ArrayList<Integer> numeros = new ArrayList<>();
         numeros.add(5);
         numeros.add(10);
+        numeros.add(-7);
         for(int x : numeros){
             System.out.println(x);
         }
