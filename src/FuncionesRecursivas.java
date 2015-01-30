@@ -128,6 +128,29 @@ public class FuncionesRecursivas {
         return 1;
     }
     
+    // 0 1 1 2 3 5 8 13 21 34 55 89 144
+    // 0 1 2 3 4 5 6  7  8  9 10 11  12
+    
+    public static void fibonachi(int n1, int before, int after){
+        if(before<n1){
+            System.out.print(before+" ");
+            fibonachi(n1, after, after+before);
+        }
+    }
+    
+    public static int fibonachi(int n){
+        if(n>1){
+            return fibonachi(n-1) + fibonachi(n-2);
+        }
+        return n;
+    }
+    
+    public static int fibonachi(int n, int before, int after, int cont){
+        if(cont<=n)
+            return fibonachi(n, after, after+before, cont+1);
+        return after;
+    }
+    
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         
@@ -135,8 +158,8 @@ public class FuncionesRecursivas {
             int n1,n2;
             String temp;
             
-            System.out.println("Seleccione que operacion desea realizar.");
-            System.out.printf("%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n",
+            System.out.println("\n\nSeleccione que operacion desea realizar.");
+            System.out.printf("%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n",
                     "1.  Factorial UP",
                     "2.  Factorial DOWN",
                     "3.  Pow UP",
@@ -149,6 +172,8 @@ public class FuncionesRecursivas {
                     "10. Es Primo",
                     "11. Es Palindrome",
                     "12. Maximo Comun Divisor",
+                    "13. Fibonachi",
+                    "14. Imprime el Fibonachi en la posicion",
                     "-1. Salir");
             System.out.print("Escoja du Opcion: ");
             switch(scan.nextInt()){
@@ -227,6 +252,15 @@ public class FuncionesRecursivas {
                     System.out.print("Ingres dos numeros separados por espacio: ");
                     n1 = scan.nextInt(); n2 = scan.nextInt();
                     System.out.println("MCD de "+n1+" y "+n2+" es: "+maxComDiv(n1, n2));
+                    break;
+                case 13: //Imprime los fibonachis
+                    System.out.print("Ingrese el Limite: ");
+                    fibonachi(scan.nextInt(), 1, 1);
+                    break;
+                case 14: //Retorna el valor fibonachi
+                    System.out.print("Ingrese la posicion del fibonachi: ");
+                    n1 = scan.nextInt();
+                    System.out.println("El Fibonachi de "+n1+" es: "+fibonachi(n1,0,1,2));
                     break;
             }
         }
