@@ -1,4 +1,5 @@
 
+import herencia.PlanIphone;
 import java.util.Date;
 
 /*
@@ -26,6 +27,9 @@ public class Fechas {
     }
     
     public static void main(String[] args) {
+        PlanIphone pi = new PlanIphone();
+       // pi.numero  =2;
+        
         Fechas f = new Fechas(5);
         f.getDia();
         
