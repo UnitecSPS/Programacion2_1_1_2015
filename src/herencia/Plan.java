@@ -20,9 +20,6 @@ public class Plan {
         precio = p;
         cliente = c;
     }
-    public Plan(){
-        this(-1,"patito",0);
-    }
 
     public int getNumero() {
         return numero;
@@ -35,10 +32,14 @@ public class Plan {
     public String getCliente() {
         return cliente;
     }
+    
+    public void quienSoy(){
+        System.out.println("SOY EL PAPA! PLAN");
+    }
 
     @Override
     public String toString() {
-        return "Plan{" + "numero=" + numero + ", precio=" + precio + ", cliente=" + cliente + '}';
+        return "numero=" + numero + ", precio=" + precio + ", cliente=" + cliente;
     }
     
     

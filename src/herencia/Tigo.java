@@ -6,6 +6,8 @@
 
 package herencia;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Docente 17082011
@@ -13,12 +15,28 @@ package herencia;
 public class Tigo {
     public static void main(String[] args) {
         //UPCASTINGS
-        Plan pi = new PlanIphone();
-        pi.numero  =2;
-        System.out.println(pi);
+        Plan pi = new PlanIphone(995,"Dennis");
         
         //FORMATO DE instanceof: variable instanceof CLASE
-        if( pi instanceof PlanIphone )
-            System.out.println("Si es Plan!");
+        if( pi instanceof PlanIphone ){
+            System.out.println("Si es Plan Iphone!");
+            //DOWNCASTING
+            //INDIRECTO---
+            PlanIphone ip = (PlanIphone)pi;
+            ip.setiTunesAccount("gotcha@ios.com");
+            //DIRECTO---
+            ((PlanIphone)pi).setiTunesAccount("gotcha@hotmail.com");
+        }
+        
+        //Colecciones de Plan
+        ArrayList<Plan> planes = new ArrayList<>();
+        planes.add(pi);
+        planes.add(new PlanBlackberry(9998, "Carlos"));
+        planes.add(new Plan(9999, "Ricardo", 20));
+        
+        for(Plan p : planes){
+            p.quienSoy();
+            System.out.println(p);
+        }
     }
 }
