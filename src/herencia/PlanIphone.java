@@ -25,6 +25,16 @@ public class PlanIphone extends Plan {
     public void setiTunesAccount(String iTunesAccount) {
         this.iTunesAccount = iTunesAccount;
     }
+    
+    @Override
+    public double calcularPago(int mins, int msgs){
+        double m=0;
+        if(mins > 500)
+            m += (mins-500)*0.8;
+        if(msgs > 1000)
+            m += (msgs-1000) * 0.01;
+        return precio + m+ 20;
+    }
 
     @Override
     public void quienSoy() {
@@ -33,7 +43,7 @@ public class PlanIphone extends Plan {
     
     @Override
     public String toString(){
-        return "PlanIphone["+super.toString()+" iTunesAccount="+iTunesAccount+"]";
+        return "PlanIphone["+super.toString()+", iTunesAccount="+iTunesAccount+"]";
     } 
     
 }

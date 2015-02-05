@@ -6,14 +6,33 @@
 
 package herencia;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Docente 17082011
  */
 public class PlanBlackberry extends Plan {
+    ArrayList<String> amigos;
+    private String pin;
+    
+    public PlanBlackberry(int n, String c, String p) {
+        super(n, c, 40);
+        pin = p;
+    }
 
-    public PlanBlackberry(int n, String c) {
-        super(n, c, 60);
+    public String getPin() {
+        return pin;
+    }
+    
+    public void addFriend(String pin){
+        if(!amigos.contains(pin))
+            amigos.add(pin);
+    }
+    
+    @Override
+    public double calcularPago(int mins, int msgs){
+        return precio + (mins * 0.05) + (msgs * 0.01);
     }
     
     @Override
@@ -23,6 +42,6 @@ public class PlanBlackberry extends Plan {
     
     @Override
     public String toString(){
-        return "PlanBB["+super.toString()+"]";
+        return "PlanBB["+super.toString()+", pin="+pin+"]";
     } 
 }

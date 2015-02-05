@@ -36,6 +36,10 @@ public class Plan {
     public void quienSoy(){
         System.out.println("SOY EL PAPA! PLAN");
     }
+    
+    public double calcularPago(int mins, int msgs){
+        return precio;
+    }
 
     @Override
     public String toString() {

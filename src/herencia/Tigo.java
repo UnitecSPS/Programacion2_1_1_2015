@@ -31,12 +31,14 @@ public class Tigo {
         //Colecciones de Plan
         ArrayList<Plan> planes = new ArrayList<>();
         planes.add(pi);
-        planes.add(new PlanBlackberry(9998, "Carlos"));
+        planes.add(new PlanBlackberry(9998, "Carlos", "PCD6520"));
         planes.add(new Plan(9999, "Ricardo", 20));
         
         for(Plan p : planes){
             p.quienSoy();
             System.out.println(p);
+            double pago = p.calcularPago(400, 800);
+            System.out.println("Pago: " + pago);
         }
     }
 }
