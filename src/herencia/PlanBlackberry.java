@@ -19,6 +19,7 @@ public class PlanBlackberry extends Plan {
     public PlanBlackberry(int n, String c, String p) {
         super(n, c, 40);
         pin = p;
+        amigos = new ArrayList<>();
     }
 
     public String getPin() {
@@ -26,8 +27,16 @@ public class PlanBlackberry extends Plan {
     }
     
     public void addFriend(String pin){
-        if(!amigos.contains(pin))
+        if(!amigos.contains(pin)){
             amigos.add(pin);
+            System.out.println("\n Friends added:");
+            listFriends();
+        }
+    }
+    
+    private void listFriends(){
+        for(String f : amigos)
+            System.out.println("-"+f);
     }
     
     @Override

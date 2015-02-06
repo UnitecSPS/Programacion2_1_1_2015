@@ -10,7 +10,6 @@ package herencia;
  *
  * @author Docente 17082011
  * 
- * El plan cuesta 60
  * Atributos: de tipo CellCard y hacerle un get
  * 
  * Constructor:
@@ -27,5 +26,52 @@ package herencia;
  * 
  */
 public class PlanPrePago extends Plan {
+    private CellCard card;
+    
+    public PlanPrePago(int n, String c) {
+        super(n, c, 0);
+        card = new CellCard500();
+    }
+
+    public CellCard getCard() {
+        return card;
+    }
+    
+    public void setCard(int tipo){
+        switch(tipo){
+            case 50:
+                card.addSaldoByCard(new CellCard50());
+                break;
+            case 100:
+                card.addSaldoByCard(new CellCard100());
+                break;
+            case 500:
+                card.addSaldoByCard(new CellCard500());
+                break;
+            default:
+                System.out.println("TARJETA INCORRECTA");
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "PlanPrePago["+super.toString()+", "+card+"]"; 
+    }
+
+    @Override
+    public double calcularPago(int mins, int msgs) {
+        double m = 0;
+        
+        if( card.isValid() ){
+            m = mins * 0.5 + msgs * 0.08;
+            card.decreaseSaldo(m);
+        }
+        else
+            System.out.println("No Tiene Saldo o Tarjeta Expiro, Recargue");
+        
+        return m;
+    }
+    
+    
     
 }
