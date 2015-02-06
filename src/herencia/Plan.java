@@ -45,6 +45,9 @@ public class Plan {
     public String toString() {
         return "numero=" + numero + ", precio=" + precio + ", cliente=" + cliente;
     }
-    
+
+    public boolean validarNumer(int num) {
+        return numero == num;
+    }
     
 }

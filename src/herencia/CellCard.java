@@ -43,7 +43,7 @@ public abstract class CellCard {
 
     @Override
     public String toString() {
-        return "CellCard{" + "expiracion=" + expiracion + ", saldo=" + saldo + '}';
+        return "CellCard{" + "expiracion=" + expiracion.getTime() + ", saldo=" + saldo + '}';
     }
     
     

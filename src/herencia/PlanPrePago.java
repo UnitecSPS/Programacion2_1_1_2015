@@ -27,5 +27,40 @@ package herencia;
  * 
  */
 public class PlanPrePago extends Plan {
+    private CellCard cell;
+    private static final double costMin=0.5,costMjs=0.05; 
+
+    public PlanPrePago(int n, String c) {
+        super(n, c, 0);
+        cell = new CellCard500();
+    }
+
+    public CellCard getCell() {
+        return cell;
+    }
     
+    public void setCard(int tipo){
+        switch(tipo){
+            case 100: cell.addSaldoByCard(new CellCard100()); break;
+            case 50: cell.addSaldoByCard(new CellCard50()); break;
+            case 500: cell.addSaldoByCard(new CellCard500()); break;
+        }
+    }
+
+    @Override
+    public double calcularPago(int mins, int msgs) {
+        double pago = 0;
+        if(cell.isValid()){
+            pago = mins*costMin + msgs*costMjs;
+            cell.decreaseSaldo(pago);
+        }else{
+            System.out.println("Tarjeta no valida!");
+        }
+        return pago;
+    }
+
+    @Override
+    public String toString() {
+        return "PlanPrePago["+super.toString() + ", "+ cell+"]";
+    }
 }
