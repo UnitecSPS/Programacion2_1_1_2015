@@ -40,5 +40,6 @@ public class Tigo {
             double pago = p.calcularPago(400, 800);
             System.out.println("Pago: " + pago);
         }
+        
     }
 }
