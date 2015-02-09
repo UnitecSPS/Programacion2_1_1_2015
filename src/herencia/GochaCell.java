@@ -103,6 +103,13 @@ public class GochaCell {
         return null;
     }
     
+    public static Plan searchConContains(int n){
+        int index = planes.indexOf(new Plan(n,"",0));
+        if (index != -1)
+            return planes.get(index);
+        return null;
+    }
+    
     public static boolean addPlan(int n,String c,String t){
         if( search(n) == null ){
             switch(t.toLowerCase()){

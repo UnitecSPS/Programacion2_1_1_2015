@@ -17,6 +17,12 @@ public class Tigo {
         //UPCASTINGS
         Plan pi = new PlanIphone(995,"Dennis");
         
+        if(pi.equals(995))
+            System.out.println("Si es cierto equals!");
+        if(pi.equals(new Plan(996,"",0))){
+            System.out.println("Si es cierto equals!");
+        }
+        
         //FORMATO DE instanceof: variable instanceof CLASE
         if( pi instanceof PlanIphone ){
             System.out.println("Si es Plan Iphone!");
@@ -39,6 +45,10 @@ public class Tigo {
             System.out.println(p);
             double pago = p.calcularPago(400, 800);
             System.out.println("Pago: " + pago);
+        }
+        
+        if(planes.contains(9998)){
+            
         }
         
     }

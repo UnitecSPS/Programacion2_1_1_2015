@@ -46,5 +46,13 @@ public class Plan {
         return "numero=" + numero + ", precio=" + precio + ", cliente=" + cliente;
     }
     
+    @Override
+    public boolean equals(Object val){
+        if(val instanceof Integer)
+            return (int)val == numero;
+        if(val instanceof Plan)
+            return ((Plan)val).getNumero() == numero;
+        return false;
+    }
     
 }
