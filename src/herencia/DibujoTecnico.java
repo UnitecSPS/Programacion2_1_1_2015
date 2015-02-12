@@ -23,5 +23,19 @@ public class DibujoTecnico {
             System.out.println(f.getNombre()+"\n--------");
             f.dibujar();
         }
+        
+        //FUNCIONES ON DEMAND--------------------------------
+        Figura fig = new Figura("Matrix"){
+            public void draw(){
+                System.out.println("010001011");
+            }
+            
+            @Override
+            public void dibujar(){
+                draw();
+            }
+        };
+        
+        fig.dibujar();
     }
 }
