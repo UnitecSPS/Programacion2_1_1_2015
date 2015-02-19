@@ -7,6 +7,7 @@
 package herencia;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -29,6 +30,7 @@ public class Tigo {
             //DOWNCASTING
             //INDIRECTO---
             PlanIphone ip = (PlanIphone)pi;
+            ip.f = new Date();
             ip.setiTunesAccount("gotcha@ios.com");
             //DIRECTO---
             ((PlanIphone)pi).setiTunesAccount("gotcha@hotmail.com");

@@ -23,7 +23,7 @@ public abstract class SocialClass {
         posts = new ArrayList<>();
     }
     
-    public boolean addFriend(String u){
+    public final boolean addFriend(String u){
         if(!friends.contains(u) && !username.equals(u)){
             friends.add(u);
             return true;
@@ -31,7 +31,7 @@ public abstract class SocialClass {
         return false;
     }
     
-    public void addPost(String msg){
+    public final void addPost(String msg){
         posts.add(msg);
     }
     

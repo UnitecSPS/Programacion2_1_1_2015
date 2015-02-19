@@ -25,7 +25,7 @@ package herencia;
  *  - toString(): Para incluir lo que ya hace el padre + CellCard
  * 
  */
-public class PlanPrePago extends Plan {
+public final class PlanPrePago extends Plan {
     private CellCard card;
     
     public PlanPrePago(int n, String c) {

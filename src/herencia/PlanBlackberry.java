@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author Docente 17082011
  */
-public class PlanBlackberry extends Plan {
+public final class PlanBlackberry extends Plan {
     ArrayList<String> amigos;
     private String pin;
     

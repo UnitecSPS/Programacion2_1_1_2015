@@ -51,9 +51,9 @@ public class GochaCell {
                     System.out.println("Cliente: ");
                     String c = lea.next();
                     System.out.println("Tipo: ");
-                    String t = lea.next();
+                    String t = lea.next().toUpperCase();
                     
-                    if( addPlan(n, c, t))
+                    if( addPlan(n, c, PlanType.valueOf(t) ))
                         System.out.println("Se agrego Exitoso");
                     else
                         System.out.println("No se pudo agregar");
@@ -110,16 +110,16 @@ public class GochaCell {
         return null;
     }
     
-    public static boolean addPlan(int n,String c,String t){
+    public static boolean addPlan(int n,String c,PlanType t){
         if( search(n) == null ){
-            switch(t.toLowerCase()){
-                case "iphone":
+            switch(t){
+                case IPHONE:
                     planes.add(new PlanIphone(n, c));
                     return true;
-                case "prepago":
+                case PREPAGO:
                     planes.add(new PlanPrePago(n, c));
                     return true;
-                case "blackberry":
+                case BLACKBERRY:
                     System.out.println("Pin: ");
                     planes.add(new PlanBlackberry(n, c, lea.next()));
                     return true;

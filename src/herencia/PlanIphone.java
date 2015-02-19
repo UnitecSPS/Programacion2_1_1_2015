@@ -6,18 +6,22 @@
 
 package herencia;
 
+import java.util.Date;
+
 /**
  *
  * @author Docente 17082011
  */
-public class PlanIphone extends Plan {
+public final class PlanIphone extends Plan {
     private String iTunesAccount;
+    public static final int IPRICE = 70;
+    public Date f;
     
     public PlanIphone(int n, String c){
-        super(n,c,70);
+        super(n,c,IPRICE);
         iTunesAccount = "";
     }
-
+    
     public String getiTunesAccount() {
         return iTunesAccount;
     }
@@ -27,7 +31,11 @@ public class PlanIphone extends Plan {
     }
     
     @Override
-    public double calcularPago(int mins, int msgs){
+    public double calcularPago(final int mins, int msgs){
+       // Math.PI = 2.13; No puedo
+        //
+        //msgs = 5;
+        //mins = 10;
         double m=0;
         if(mins > 500)
             m += (mins-500)*0.8;

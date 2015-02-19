@@ -21,15 +21,15 @@ public class Plan {
         cliente = c;
     }
 
-    public int getNumero() {
+    public final int getNumero() {
         return numero;
     }
 
-    public double getPrecio() {
+    public final double getPrecio() {
         return precio;
     }
 
-    public String getCliente() {
+    public final String getCliente() {
         return cliente;
     }
     
