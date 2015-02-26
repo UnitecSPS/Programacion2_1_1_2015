@@ -6,6 +6,7 @@
 
 package errores;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -31,6 +32,7 @@ public class TraiCatch {
         }
         catch(InputMismatchException e){
             System.out.println("Ingrese un valor valido");
+            //throw e;
         }
         catch(ArithmeticException e){
             System.out.println("No se puede dividir entre cero");
@@ -40,17 +42,34 @@ public class TraiCatch {
             //e.printStackTrace();
             System.out.println(e.getStackTrace()[0].toString());
         }
+        finally{
+            System.out.println("Se corrio finally");
+            closeConnection();
+        }
         
         System.out.println("Finalizando a A....");
     }
 
     private static void B() {
         System.out.println("Ejecutando a B");
-        Scanner lea = /*new Scanner(System.in);*/null;
+        Scanner lea = new Scanner(System.in);//null;
         int n = lea.nextInt();
+        ArrayTest(n);
         int x = 10/n;
-        int arr[] = {1,2,4};
-        System.out.println("Pos: " + arr[x]);
+        //int arr[] = {1,2,4};
+        //System.out.println("Pos: " + arr[x]);
         System.out.println("Finalizando B");
     }
+
+    private static void closeConnection() {
+        System.out.println("Cerrando la conexion al Mars Rovers");
+        System.out.println("Limpiando memoria");
+    }
+    
+    private static void ArrayTest(int pos){
+        ArrayList<String> cads = new ArrayList<>();
+        cads.add("HOLA");
+        System.out.println(cads.get(pos));
+    }
+
 }

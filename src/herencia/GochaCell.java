@@ -7,6 +7,7 @@
 package herencia;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -32,7 +33,7 @@ public class GochaCell {
         
                ES NECESARIO HACER UNA FUNCION DE BUSCAR
         */
-        int op;
+        int op=0;
         do{
             System.out.println("1- Agregar un nuevo Plan");
             System.out.println("2- Cobrar un Plan");
@@ -42,55 +43,65 @@ public class GochaCell {
             System.out.println("6- Agregar Tarjeta");
             System.out.println("7- Salir");
             System.out.println("Escoja opcion: ");
-            op = lea.nextInt();
             
-            switch(op){
-                case 1:
-                    System.out.println("Numero: ");
-                    int n = lea.nextInt();
-                    System.out.println("Cliente: ");
-                    String c = lea.next();
-                    System.out.println("Tipo: ");
-                    String t = lea.next().toUpperCase();
-                    
-                    if( addPlan(n, c, PlanType.valueOf(t) ))
-                        System.out.println("Se agrego Exitoso");
-                    else
-                        System.out.println("No se pudo agregar");
-                    break;
-                case 2:
-                    System.out.println("Numero: ");
-                    n = lea.nextInt();
-                    System.out.println("Minutos: ");
-                    int mins = lea.nextInt();
-                    System.out.println("Mensaje: ");
-                    int msgs = lea.nextInt();
-                    charge(n, mins, msgs);
-                    break;
-                case 3:
-                    listPlans();
-                    break;
-                case 4:
-                    System.out.println("Numero: ");
-                    n = lea.nextInt();
-                    System.out.println("Itunes: ");
-                    String it = lea.next();
-                    setItunes(n, it);
-                    break;
-                case 5:
-                    System.out.println("Numero: ");
-                    n = lea.nextInt();
-                    System.out.println("Pin de Amigo: ");
-                    String pin = lea.next();
-                    addBBFriend(n, pin);
-                    break;
-                case 6:
-                    System.out.println("Numero: ");
-                    n = lea.nextInt();
-                    System.out.println("Tipo [50,100,500]: ");
-                    int tc = lea.nextInt();
-                    setCard(n, tc);
-                    break;
+            try{
+                op = lea.nextInt();
+
+                switch(op){
+                    case 1:
+                        System.out.println("Numero: ");
+                        int n = lea.nextInt();
+                        System.out.println("Cliente: ");
+                        String c = lea.next();
+                        System.out.println("Tipo: ");
+                        String t = lea.next().toUpperCase();
+
+                        if( addPlan(n, c, PlanType.valueOf(t) ))
+                            System.out.println("Se agrego Exitoso");
+                        else
+                            System.out.println("No se pudo agregar");
+                        break;
+                    case 2:
+                        System.out.println("Numero: ");
+                        n = lea.nextInt();
+                        System.out.println("Minutos: ");
+                        int mins = lea.nextInt();
+                        System.out.println("Mensaje: ");
+                        int msgs = lea.nextInt();
+                        charge(n, mins, msgs);
+                        break;
+                    case 3:
+                        listPlans();
+                        break;
+                    case 4:
+                        System.out.println("Numero: ");
+                        n = lea.nextInt();
+                        System.out.println("Itunes: ");
+                        String it = lea.next();
+                        setItunes(n, it);
+                        break;
+                    case 5:
+                        System.out.println("Numero: ");
+                        n = lea.nextInt();
+                        System.out.println("Pin de Amigo: ");
+                        String pin = lea.next();
+                        addBBFriend(n, pin);
+                        break;
+                    case 6:
+                        System.out.println("Numero: ");
+                        n = lea.nextInt();
+                        System.out.println("Tipo [50,100,500]: ");
+                        int tc = lea.nextInt();
+                        setCard(n, tc);
+                        break;
+                }
+            }
+            catch(InputMismatchException e){
+                System.out.println("Ingrese una opcion correcta");
+                lea.next();
+            }
+            catch(Exception e){
+                System.out.println("Error: " + e);
             }
         }while(op!=7);
     }
@@ -162,7 +173,7 @@ public class GochaCell {
         }
     }
     
-    public static void addBBFriend(int n, String pin){
+    public static void addBBFriend(int n, String pin)throws FriendAlreadyExistException{
         Plan p = search(n);
         if( p instanceof PlanBlackberry ){
             ((PlanBlackberry)p).addFriend(pin);

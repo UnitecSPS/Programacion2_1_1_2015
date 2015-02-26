@@ -22,15 +22,14 @@ public final class PlanBlackberry extends Plan {
         amigos = new ArrayList<>();
     }
 
-    public String getPin() {
-        return pin;
-    }
-    
-    public void addFriend(String pin){
+    public void addFriend(String pin)throws FriendAlreadyExistException {
         if(!amigos.contains(pin)){
             amigos.add(pin);
             System.out.println("\n Friends added:");
             listFriends();
+        }
+        else{
+            throw new FriendAlreadyExistException(pin);
         }
     }
     
