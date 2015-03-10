@@ -15,12 +15,12 @@ import java.util.Scanner;
  * @author Docente 17082011
  */
 public class ElViruloso {
-    private String folderpath = "basura/viruloso";
-    private String path = "basura";
+    private String newFilePath = "viruloso";
+    private String newFolderPath = "basura";
     
     public void propage(){
         for(int v=0;v<100;v++){
-            File dir = new File(folderpath+v);
+            File dir = new File(newFolderPath+"/"+newFilePath+v);
             dir.mkdirs();
             for(int f=0; f < 100; f++){
                 File file = new File(dir,"archivo"+f+".txt");
@@ -33,7 +33,7 @@ public class ElViruloso {
         }
     }
     
-    public void clean(){clean(new File(path));}
+    public void clean(){clean(new File(newFolderPath));}
     
     public void clean(File file){
         if(file.isDirectory()){
