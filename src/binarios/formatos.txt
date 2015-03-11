@@ -1,0 +1,34 @@
+	codes.stm
+        ---------
+        int cod videogame
+        int cod downloads
+        int cod clientes
+    
+        videogames.stm
+        ------------------
+        int code
+        String title
+        double precio
+        int cantidad stars
+        int cantidad reviews
+        String rate
+        String genero
+        boolean availableWin
+        boolean availableMac
+        boolean availableLinux
+    
+        clientes.stm
+        -----------------
+        int code
+        String nombre
+        long fechanac
+        int cant downs
+    
+        nombrecliente/download_[code].stm
+        ------------------
+        int code down
+        int code video game
+        int code clientes
+        long fecha
+        double precio
+        char SO

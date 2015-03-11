@@ -16,18 +16,16 @@ import java.util.Scanner;
 public class FileWriterTest {
     public static void main(String[] args) {
         do{
-            try{
-                Scanner lea = new Scanner(System.in);
-                lea.useDelimiter("\n");
+            Scanner lea = new Scanner(System.in);
+            lea.useDelimiter("\n");
                 
-                System.out.println("Path del file: ");
-                String path = lea.next();
-                System.out.println("Append o no? (s/n): ");
-                char app = lea.next().charAt(0);
-
-                FileWriter fw = new FileWriter(path, app=='s');
+            System.out.println("Path del file: ");
+            String path = lea.next();
+            System.out.println("Append o no? (s/n): ");
+            char app = lea.next().charAt(0);
+              
+            try(FileWriter fw = new FileWriter(path, app=='s')){
                 String txt;
-                
                 do{
                     System.out.println("Ingrese un texto: ");
                     txt = lea.next();
@@ -36,11 +34,11 @@ public class FileWriterTest {
                     fw.flush();
                 }while(!txt.equals("#$%"));
                 
-                fw.close();
             }
             catch(Exception e){
                 System.out.println(e);
             }
+            
         }while(true);
     }
 }
