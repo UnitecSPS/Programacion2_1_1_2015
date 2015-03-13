@@ -27,7 +27,12 @@ public class SteamLand {
             System.out.println("3- Agregar Review");
             System.out.println("4- Agregar Ciente");
             System.out.println("5- Listar Clientes");
-            System.out.println("7- Salir");
+            System.out.println("6- Download");
+            System.out.println("7- updatePriceFor");
+            System.out.println("8- updateAvailableFor");
+            System.out.println("9- reportForClient");
+            System.out.println("10-clientEstrella");
+            System.out.println("-1.- Salir");
             System.out.println("Opcion: ");
             
             try{
@@ -49,6 +54,25 @@ public class SteamLand {
                     case 5:
                         store.listClients();
                         break;
+                    case 6:
+                        System.out.println("Ingrese: codeGame codeClient Plataforma('W'/'M'/'L')");
+                        store.downloadGame(lea.nextInt(), lea.nextInt(), lea.next().charAt(0));
+                        break;
+                    case 7:
+                        System.out.println("Ingrese: codeGame Priece");
+                        store.updatePriceFor(lea.nextInt(), lea.nextDouble());
+                        break;
+                    case 8:
+                        System.out.println("Ingrese: codeGame Plataforma('W'/'M'/'L')");
+                        store.updateAvailableFor(lea.nextInt(), lea.next().charAt(0));
+                        break;
+                    case 9:
+                        System.out.println("Ingrese: codeCliente pathFile");
+                        store.reportForClient(lea.nextInt(), lea.next());
+                        break;
+                    case 10:
+                        store.clientEstrella();
+                        break;
                 }
             }
             catch(Exception e){
@@ -56,7 +80,7 @@ public class SteamLand {
             }
             
             
-        }while(op != 7);
+        }while(op != -1);
     }
 
     private static void addGame()throws IOException {

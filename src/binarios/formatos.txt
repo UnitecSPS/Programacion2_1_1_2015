@@ -8,11 +8,11 @@
         ------------------
         int code
         String title
-        double precio
+        double precio   
         int cantidad stars
         int cantidad reviews
-        String rate
         String genero
+        String rate
         boolean availableWin
         boolean availableMac
         boolean availableLinux
@@ -28,7 +28,6 @@
         ------------------
         int code down
         int code video game
-        int code clientes
         long fecha
         double precio
         char SO
