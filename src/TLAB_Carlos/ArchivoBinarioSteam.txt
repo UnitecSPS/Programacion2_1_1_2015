@@ -1,0 +1,32 @@
+
+- int codigo videojuegos
+- int codigo downloads
+- int codigo cliente
+
+videogames.stm
+--------------------
+- int cod
+- String title
+- double precio
+- int cant_estrellas
+- int cant_reviews
+- String genero
+- String rate
+- boolean isWin
+- boolean isMac
+- boolean isLinux
+
+nombrecliente/download_[code].stm
+------------------------
+- int cod_down
+- int cod_vg
+- long fecha
+- double precio
+- char S.O {W M L}
+
+clients.stm
+--------------------
+- int codigo
+- String nombre
+- long fechanac
+- long cantdown
