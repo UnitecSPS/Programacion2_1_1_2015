@@ -253,31 +253,31 @@ public class Steam {
         if(searchClient(ccli)){
             if(RateVideoGame(cvg)!=null){
                 if(ExistOS(cvg)){
-                    
-                }
-                if("PG".equals(RateVideoGame(cvg))){
-                    if(EdadCliente(ccli)>=6){
-                        PathDownload(ccli, ROOT_FOLDER);
+                    if("PG".equals(RateVideoGame(cvg))){
+                        if(EdadCliente(ccli)>=6){
+                            PathDownload(ccli, ROOT_FOLDER);
+                        }
+
+                        return false;
                     }
-                    
-                    return false;
-                }
-                if("PG13".equals(RateVideoGame(cvg))){
-                    if(EdadCliente(ccli)>=13){
-                        
+                    if("PG13".equals(RateVideoGame(cvg))){
+                        if(EdadCliente(ccli)>=13){
+
+                        }
+                    }
+                    if("TEEN".equals(RateVideoGame(cvg))){
+                        if(EdadCliente(ccli)>=15){
+
+                        }
+                    }
+                    if("MATURE".equals(RateVideoGame(cvg))){
+                        if(EdadCliente(ccli)>=18){
+
+                        }
                     }
                 }
-                if("TEEN".equals(RateVideoGame(cvg))){
-                    if(EdadCliente(ccli)>=15){
-                        
-                    }
-                }
-                if("MATURE".equals(RateVideoGame(cvg))){
-                    if(EdadCliente(ccli)>=18){
-                        
-                    }
-                }
-            }rClientes.readUTF();
+            }
+            rClientes.readUTF();
             rClientes.readLong();
             int Dow = rClientes.readInt();
             rClientes.skipBytes(-4);
