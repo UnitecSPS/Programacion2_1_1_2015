@@ -1,6 +1,7 @@
 package binarios;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Calendar;
@@ -174,7 +175,7 @@ public class Steam {
         rClientes.writeInt(0);
         //creamos el folder
 
-        new File("clients/"+clientFolder(codigo,n)).mkdirs();
+        new File(ROOT_FOLDER +"/clients/"+clientFolder(codigo,n)).mkdirs();
     }
     
     private String clientFolder(int codigo, String n) {
@@ -204,4 +205,160 @@ public class Steam {
                     " Ha bajado "+cd+" games.");
         }
     }
+    public int EdadCliente(int cc)throws IOException{
+        if(searchClient(cc)){
+            rClientes.readUTF();
+            int Edad = rClientes.readInt();
+            rClientes.readLong();
+            return Edad;
+        }
+        return -1;
+    }
+    public String RateVideoGame(int cvg)throws IOException{
+        if(searchVideoGame(cvg)){
+            rVideoGames.readUTF();
+            rVideoGames.skipBytes(16);
+            rVideoGames.readUTF();
+            String Rat = rVideoGames.readUTF();
+            rVideoGames.skipBytes(3);
+            return Rat;
+        }
+        
+        return null;
+    }
+    public void PathDownload(int cc, String nc){
+        String Path = "steam/clients";
+        new File(Path + clientFolder(cc, nc)).mkdirs();
+    }
+    public boolean ExistOS(int Cod)throws IOException{
+        if(searchVideoGame(Cod)){
+            rVideoGames.readUTF();
+            rVideoGames.skipBytes(16);
+            rVideoGames.readUTF();
+            rVideoGames.readUTF();
+            boolean w = rVideoGames.readBoolean();
+            boolean m = rVideoGames.readBoolean();
+            boolean l = rVideoGames.readBoolean();
+            if(w==true)
+                return true;
+            if(m==true)
+                return true;
+            if(l==true)
+                return true;
+            
+        }
+        return false;
+    }
+    public boolean downloadGame(int cvg, int ccli, char SO)throws IOException{
+        if(searchClient(ccli)){
+            if(RateVideoGame(cvg)!=null){
+                if(ExistOS(cvg)){
+                    
+                }
+                if("PG".equals(RateVideoGame(cvg))){
+                    if(EdadCliente(ccli)>=6){
+                        PathDownload(ccli, ROOT_FOLDER);
+                    }
+                    
+                    return false;
+                }
+                if("PG13".equals(RateVideoGame(cvg))){
+                    if(EdadCliente(ccli)>=13){
+                        
+                    }
+                }
+                if("TEEN".equals(RateVideoGame(cvg))){
+                    if(EdadCliente(ccli)>=15){
+                        
+                    }
+                }
+                if("MATURE".equals(RateVideoGame(cvg))){
+                    if(EdadCliente(ccli)>=18){
+                        
+                    }
+                }
+            }rClientes.readUTF();
+            rClientes.readLong();
+            int Dow = rClientes.readInt();
+            rClientes.skipBytes(-4);
+            rClientes.writeInt(Dow+1);
+        }
+        return false;
+    }
+    
+    public void UpdatePriceFor(int cvg, double price)throws IOException{
+        if(searchVideoGame(cvg)){
+            rVideoGames.readUTF();
+            rVideoGames.writeDouble(price);
+        }
+    }
+    public void updateAvailableFor(int cvg, char SO)throws IOException{
+        if(searchVideoGame(cvg)){
+            rVideoGames.readUTF();
+            rVideoGames.skipBytes(16);
+            rVideoGames.readUTF();
+            rVideoGames.readUTF();
+            if(SO=='W')
+                rVideoGames.writeBoolean(true);
+            if(SO=='M')
+                rVideoGames.writeBoolean(true);
+            if(SO=='L')
+                rVideoGames.writeBoolean(true);
+        }
+    }
+    public void reportForClient(int ccli, String txtFile)throws IOException{
+        if(searchClient(ccli)){
+            File c = new File(clientFolder(ccli, txtFile));
+            c.createNewFile();
+            
+            FileWriter fr = new FileWriter(c);
+            String ArrC[] = new String[101];
+            ArrC = ArregloClientes();
+            int Cont = 0;
+            while(rClientes.getFilePointer() < rClientes.length()){
+                fr.write(ArrC[Cont]);
+                Cont++;
+            }
+            System.out.println("REPORTE FUE CREADO");
+        }
+        System.out.println("NO SE PUEDE CREAR REPORTE");
+    }
+    
+    public int MaxClient()throws IOException{
+        rClientes.seek(0);
+        int cliente = 0;
+        int Cant = 0;
+        while(rClientes.getFilePointer() < rClientes.length()){
+            int cod = rClientes.readInt();
+            String n = rClientes.readUTF();
+            Date fecha = new Date(rClientes.readLong());
+            int cd = rClientes.readInt();
+            if(cd>Cant){
+                Cant = cd;
+                cliente = cod;            
+            }
+            
+        }
+        return cliente;
+        
+    }
+    public void clientEstrella()throws IOException{
+        System.out.println("El cliente que mas download tiene es : " + MaxClient());;
+    }
+    
+    public String[] ArregloClientes()throws IOException{
+        rClientes.seek(0);
+        String Arre[] = new String[100];
+        int Cont = 0;
+        while(rClientes.getFilePointer() < rClientes.length()){
+            int cod = rClientes.readInt();
+            String n = rClientes.readUTF();
+            Date fecha = new Date(rClientes.readLong());
+            int cd = rClientes.readInt();
+            Arre[Cont] = cod + n ;
+            Cont ++;
+        }
+        return Arre;
+    }
+    
 }
