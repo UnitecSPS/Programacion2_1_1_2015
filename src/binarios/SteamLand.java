@@ -24,6 +24,9 @@ public class SteamLand {
         do{
             System.out.println("1- Agregar Video Game");
             System.out.println("2- Listar Available Games");
+            System.out.println("3- Agregar Review");
+            System.out.println("4- Agregar Ciente");
+            System.out.println("5- Listar Clientes");
             System.out.println("7- Salir");
             System.out.println("Opcion: ");
             
@@ -36,6 +39,15 @@ public class SteamLand {
                         break;
                     case 2:
                         store.listAvailableGames();
+                        break;
+                    case 3:
+                        review();
+                        break;
+                    case 4:
+                        addCliente();
+                        break;
+                    case 5:
+                        store.listClients();
                         break;
                 }
             }
@@ -58,5 +70,25 @@ public class SteamLand {
         Rate r = Rate.valueOf(lea.next().toUpperCase());
         
         store.addVideoGame(t, p, g, r);
+    }
+
+    private static void review() throws IOException{
+        System.out.println("Codigo: ");
+        int cvg = lea.nextInt();
+        System.out.println("Stars (0-5): ");
+        int stars = lea.nextInt();
+        int rating = store.addReview(cvg, stars);
+        if( rating >= 0 )
+            System.out.println("Nuevo Rating: "+rating);
+        else
+            System.out.println("No se encontro o las estrellas estan malas");
+    }
+
+    private static void addCliente()throws IOException {
+        System.out.println("Nombre: ");
+        String n = lea.next();
+        System.out.println("Fecha dd/mm/aaaa: ");
+        String f = lea.next();
+        store.addClient(n, f);
     }
 }

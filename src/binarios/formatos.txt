@@ -24,7 +24,7 @@
         long fechanac
         int cant downs
     
-        nombrecliente/download_[code].stm
+        downloads/download_[code].stm
         ------------------
         int code down
         int code video game

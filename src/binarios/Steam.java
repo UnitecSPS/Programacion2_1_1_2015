@@ -3,6 +3,8 @@ package binarios;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.Calendar;
+import java.util.Date;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -87,8 +89,9 @@ public class Steam {
     
     public void listAvailableGames()throws IOException{
         rVideoGames.seek(0);
-        int rating = 0;
+       
         while(rVideoGames.getFilePointer() < rVideoGames.length()){
+            int rating = 0;
             int c = rVideoGames.readInt();
             String t = rVideoGames.readUTF();
             double p = rVideoGames.readDouble();
@@ -113,6 +116,92 @@ public class Steam {
                     System.out.print(" LINUX");
                 System.out.println("");
             }
+        }
+    }
+    
+    public boolean searchVideoGame(int cvg)throws IOException{
+        rVideoGames.seek(0);
+        while(rVideoGames.getFilePointer() < rVideoGames.length()){
+            if(rVideoGames.readInt() == cvg)
+                return true;
+            rVideoGames.readUTF();
+            rVideoGames.skipBytes(16);
+            rVideoGames.readUTF();
+            rVideoGames.readUTF();
+            rVideoGames.skipBytes(3);
+        }
+        return false;
+    }
+    
+    public int addReview(int cbg, int stars)throws IOException{
+        if(stars >= 0 && stars <= 5){
+            if( searchVideoGame(cbg) ){
+                rVideoGames.readUTF();
+                rVideoGames.readDouble();
+                long pos = rVideoGames.getFilePointer();
+                int s = rVideoGames.readInt();
+                int r = rVideoGames.readInt();
+                rVideoGames.seek(pos);
+                rVideoGames.writeInt(s+stars);
+                rVideoGames.writeInt(r+1);
+                return (s+stars) / (r+1);
+            }
+        }
+        return -1;
+    }
+    
+    /**
+     * Agregar un nuevo cliente
+     * @param n Nombre del cliente
+     * @param f Fecha de Nacimiento en formato dd/mm/aaaa
+     */
+    public void addClient(String n, String f)throws IOException{
+        rClientes.seek(rClientes.length());
+        //codigo
+        int codigo = getClientAvailableCode();
+        rClientes.writeInt(codigo);
+        //nombre
+        rClientes.writeUTF(n);
+        //fecha
+        String data[] = f.split("/");
+        int dia = Integer.parseInt(data[0]);
+        int mes = Integer.parseInt(data[1]);
+        int year = Integer.parseInt(data[2]);
+        Calendar c = Calendar.getInstance();
+        c.set(year, mes-1, dia);
+        rClientes.writeLong(c.getTimeInMillis());
+        //cantidad dows
+        rClientes.writeInt(0);
+        //creamos el folder
+
+        new File("clients/"+clientFolder(codigo,n)).mkdirs();
+    }
+    
+    private String clientFolder(int codigo, String n) {
+        return codigo + n.toLowerCase().trim();
+    }
+    
+    public boolean searchClient(int cc)throws IOException{
+        rClientes.seek(0);
+        while(rClientes.getFilePointer() < rClientes.length()){
+            if(rClientes.readInt() == cc)
+                return true;
+            rClientes.readUTF();
+            rClientes.skipBytes(12);
+        }
+        return false;
+    }
+    
+    public void listClients()throws IOException{
+        rClientes.seek(0);
+        while(rClientes.getFilePointer() < rClientes.length()){
+            int cod = rClientes.readInt();
+            String n = rClientes.readUTF();
+            Date fecha = new Date(rClientes.readLong());
+            int cd = rClientes.readInt();
+            
+            System.out.println(cod+"-"+n+" nacido en "+fecha+
+                    " Ha bajado "+cd+" games.");
         }
     }
 }
