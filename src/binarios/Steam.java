@@ -1,6 +1,8 @@
 package binarios;
 
+
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Calendar;
@@ -21,6 +23,7 @@ public class Steam {
     RandomAccessFile rVideoGames;
     RandomAccessFile rClientes;
     RandomAccessFile rCodes;
+    RandomAccessFile rDownloads;
     public static final String ROOT_FOLDER  = "steam";
     
     public Steam(){
@@ -204,4 +207,139 @@ public class Steam {
                     " Ha bajado "+cd+" games.");
         }
     }
+    
+     public boolean downloadGame(int cvg, int ccli, char SO) throws IOException{
+        int codc;
+        int codv;
+        double pv = 0;
+        String n = "";
+        String v = "";
+        
+        if (searchVideoGame(cvg) && searchClient(ccli)) {
+            rDownloads.seek(rDownloads.length());
+            rDownloads.writeInt(getDownloadAvailableCode());
+            rDownloads.writeInt(cvg);
+            Calendar c = Calendar.getInstance();
+            rDownloads.writeLong(c.getTimeInMillis());
+            rDownloads.writeChar(SO);
+            
+            rClientes.seek(0);
+            while(rClientes.getFilePointer() < rClientes.length()){
+                codc = rClientes.readInt();
+                n = rClientes.readUTF();
+            }
+            
+            rVideoGames.seek(0);
+            while(rVideoGames.getFilePointer() < rVideoGames.length()){
+                codv = rVideoGames.readInt();
+                v = rVideoGames.readUTF();
+                pv = rVideoGames.readDouble();
+                
+            }
+            
+            new File(pathDownload()).mkdirs();
+            System.out.println(n+" has bajado "+v+" a un precio de $"+pv);
+        }
+        return false;
+    }
+    
+    public void listDownloads() throws IOException{
+        rDownloads.seek(0);
+        while (rDownloads.getFilePointer() < rDownloads.length()){
+            rVideoGames.seek(0);
+            while (rVideoGames.getFilePointer() < rVideoGames.length()){
+                int codv = rVideoGames.readInt();
+                String nom = rVideoGames.readUTF();
+                double precio = rVideoGames.readDouble();
+            
+                int codd = rDownloads.readInt();
+                int vg = rDownloads.readInt();
+                Date fecha = new Date(rDownloads.readLong());
+                char os = rDownloads.readChar();
+            
+                System.out.println(codd+" - "+nom+" - "+precio+ " - "+os);
+            }
+        }
+    }
+    
+    private String pathDownload(){
+        return ROOT_FOLDER+"/clients/clientfolder/downloads.stm";
+    }
+    
+    public void updatePriceFor(int cvg, double newprice) throws IOException{
+        if (searchVideoGame(cvg)) {
+            rVideoGames.readUTF();
+            long pos = rVideoGames.getFilePointer();
+            rVideoGames.readDouble();
+            rVideoGames.seek(pos);
+            rVideoGames.writeDouble(newprice);
+        }
+    }
+    
+    public void updateAvailableFor(int cvg, char SO) throws IOException {
+        if (searchVideoGame(cvg)) {
+            String n = rVideoGames.readUTF();
+            rVideoGames.readDouble();
+            rVideoGames.readInt();
+            rVideoGames.readInt();
+            rVideoGames.readUTF();
+            rVideoGames.readUTF();
+            switch(SO){
+                case 'W':
+                    rVideoGames.readBoolean();
+                    if (rVideoGames.readBoolean() == true) {
+                        rVideoGames.writeBoolean(false);
+                        System.out.println(n+" ya no esta disponible para "+SO);
+                    } else {
+                        rVideoGames.writeBoolean(true);
+                        System.out.println(n+" ahora esta disponible para "+SO);
+                    }
+                    break;
+                case 'M':
+                    rVideoGames.readBoolean();
+                    if (rVideoGames.readBoolean() == true) {
+                        rVideoGames.writeBoolean(false);
+                        System.out.println(n+" ya no esta disponible para "+SO);
+                    } else {
+                        rVideoGames.writeBoolean(true);
+                        System.out.println(n+" ahora esta disponible para "+SO);
+                    }
+                    break;
+                case 'L':
+                    rVideoGames.readBoolean();
+                    if (rVideoGames.readBoolean() == true) {
+                        rVideoGames.writeBoolean(false);
+                        System.out.println(n+" ya no esta disponible para "+SO);
+                    } else {
+                        rVideoGames.writeBoolean(true);
+                        System.out.println(n+" ahora esta disponible para "+SO);
+                    }
+                    break;
+            }
+            
+            
+        }
+    }
+    
+    
+    
+    public void reportForClient(int ccli, String txtFile) throws IOException{
+        if (searchClient(ccli)) {
+            File text = new File(ROOT_FOLDER+"/"+txtFile);
+            FileWriter fw = new FileWriter(text, false);
+            String t = "";
+            switch(t){
+                case "Clientes":
+                    listClients();
+                case "Downloads":
+                    listDownloads();
+            }
+            fw.write(t);
+        }
+    }
+    
+    public void clientEstrellas(){
+        
+    }
+    
 }
