@@ -6,11 +6,13 @@
 
 package herencia;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Docente 17082011
  */
-public class Plan {
+public class Plan implements Serializable {
     protected int numero;
     protected double precio;
     protected String cliente;
