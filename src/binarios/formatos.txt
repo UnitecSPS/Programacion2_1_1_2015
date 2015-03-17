@@ -11,8 +11,8 @@
         double precio
         int cantidad stars
         int cantidad reviews
-        String rate
         String genero
+        String rate
         boolean availableWin
         boolean availableMac
         boolean availableLinux
@@ -24,11 +24,10 @@
         long fechanac
         int cant downs
     
-        downloads/download_[code].stm
+        clients/[codclient][nombre]/download_[code].stm
         ------------------
         int code down
         int code video game
-        int code clientes
         long fecha
         double precio
         char SO
