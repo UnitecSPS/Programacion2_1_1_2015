@@ -216,7 +216,7 @@ public class Steam {
             double price = rVideoGames.readDouble();
             rVideoGames.skipBytes(8);
             rVideoGames.readUTF();
-            Rate rate = Rate.valueOf(rVideoGames.readUTF());
+            Rate rate = Rate.valueOf(rVideoGames.readUTF().toUpperCase());
             boolean OS=false;
             switch(SO){
                 case 'W': OS = rVideoGames.readBoolean(); 
@@ -328,6 +328,7 @@ public class Steam {
             report.write("Tolat Invertido: $"+invertido);
             
             System.out.println("Reporte Creado!");
+            report.close();
         }else{
             System.out.println("No se Pudo crear Reporte!");
         }
