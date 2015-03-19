@@ -6,11 +6,15 @@
 
 package memoria;
 
+import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Docente 17082011
  */
-public class Nodo {
+public class Nodo implements Serializable, Cloneable{
     public String name;
     public Nodo next;
 
@@ -22,6 +26,11 @@ public class Nodo {
     @Override
     public String toString() {
         return "Nodo{" + "name=" + name + '}';
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
     
     

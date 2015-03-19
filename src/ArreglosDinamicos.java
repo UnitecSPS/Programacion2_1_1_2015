@@ -23,6 +23,7 @@ public class ArreglosDinamicos {
         Date d = new Date();
         
         fechas.add(d);
+        //cadenas.add(1,"Carlos");
         cadenas.add("Hola");
         cadenas.add(0,"Mundo");
         //recorro un arraylist
