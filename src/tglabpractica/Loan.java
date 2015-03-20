@@ -34,7 +34,7 @@ public class Loan implements Pagable, Serializable{
     @Override
     public void pay() throws AlreadyPaidException {
         Calendar now = Calendar.getInstance();
-        int diff = now.get(Calendar.MONTH) - fechaCreacionDelPrestamo.get(Calendar.MONTH); //???
+        int diff = now.get(Calendar.YEAR) - fechaCreacionDelPrestamo.get(Calendar.YEAR); //???
         try{
             if(!cuotas[diff].isPagada()){
                 cuotas[diff].payThisBill();
