@@ -13,6 +13,7 @@ import shapes.DrawCircle;
  * @author Docente 17082011
  */
 public class Circulo extends Figura {
+
     public Circulo(){
         super("circulo");
     }

@@ -13,6 +13,7 @@ package memoria;
 public class Nodo {
     public String name;
     public Nodo next;
+    public Nodo before;
 
     public Nodo(String name) {
         this.name = name;
