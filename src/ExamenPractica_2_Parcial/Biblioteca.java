@@ -72,6 +72,7 @@ public class Biblioteca {
     
     public boolean addBook(int code, String title, double rentPrice) throws IOException{
         if(searchBook(code)==-1){
+            rBooks.seek(rBooks.length());
             long pos = rBooks.getFilePointer();
             rBooks.seek(rBooks.length());
             rBooks.writeInt(code);
