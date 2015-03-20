@@ -132,13 +132,13 @@ public class Biblioteca {
     public void reportBooks(String filename) throws IOException{
         FileWriter fw = new FileWriter(filename, false);
         rBooks.seek(0);
+        fw.write("***** REPORT BOOKS *****\n");
         while(rBooks.getFilePointer() < rBooks.length()){
             int code = rBooks.readInt();
             String title = rBooks.readUTF();
             double p = rBooks.readDouble();
             int copias = rBooks.readInt();
             
-            fw.write("***** REPORT BOOKS *****\n");
             fw.write("Code: "+code+" - Title: "+title+" - Precio:"+p+" - Copias Disponibles: "+copias+"\n");
         }
         fw.close();
