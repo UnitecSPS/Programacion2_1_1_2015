@@ -24,7 +24,7 @@ public class Biblioteca {
         root=null;
         try {
             File rootDir = new File(ROOT_PATH);
-            if(!rootDir.exists()) rootDir.mkdir();
+            rootDir.mkdir();
             
             rBooks = new RandomAccessFile(rootDir+"/books.boo", "rw");
             reloadList();
