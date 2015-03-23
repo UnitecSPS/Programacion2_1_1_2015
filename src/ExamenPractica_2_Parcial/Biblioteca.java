@@ -52,12 +52,13 @@ public class Biblioteca {
 
     private void addNode(NodoBook obj) {
         if(isEmpty()) root=obj;
-        
-        NodoBook tmp = root;
-        while(tmp.nextBook!=null){
-            tmp = tmp.nextBook;
+        else{
+            NodoBook tmp = root;
+            while(tmp.nextBook!=null){
+                tmp = tmp.nextBook;
+            }
+            tmp.nextBook = obj;
         }
-        tmp.nextBook = obj;
     }
     
     public long searchBook(int code){
